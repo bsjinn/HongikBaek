@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,12 +17,12 @@ import com.sendbird.android.SendBirdException;
 import com.sendbird.android.sample.R;
 import com.sendbird.android.sample.groupchannel.GroupChannelActivity;
 import com.sendbird.android.sample.openchannel.OpenChannelActivity;
-import com.sendbird.android.sample.utils.PreferenceUtils;
+import com.sendbird.andr oid.sample.utils.PreferenceUtils;
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
-    private NavigationView mNavView;
+    private Button openBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,36 +32,22 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar_main);
         setSupportActionBar(mToolbar);
 
-        mNavView = (NavigationView) findViewById(R.id.nav_view_main);
-        mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        openBtn=(Button)findViewById(R.id.openbtn);
+        openBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-
-                if (id == R.id.nav_item_open_channels) {
-                    Intent intent = new Intent(MainActivity.this, OpenChannelActivity.class);
-                    startActivity(intent);
-                    return true;
-
-                } else if (id == R.id.nav_item_group_channels) {
-                    Intent intent = new Intent(MainActivity.this, GroupChannelActivity.class);
-                    startActivity(intent);
-                    return true;
-
-                } else if (id == R.id.nav_item_disconnect) {
-                    // Unregister push tokens and disconnect
-                    disconnect();
-                    return true;
-                }
-
-                return false;
+            public void onClick(View view) {
+                //code for click
+                Intent intent = new Intent(MainActivity.this, OpenChannelActivity.class);
+                startActivity(intent);
             }
         });
 
+/*
         // Displays the SDK version in a TextView
         String sdkVersion = String.format(getResources().getString(R.string.all_app_version),
                 BaseApplication.VERSION, SendBird.getSDKVersion());
         ((TextView) findViewById(R.id.text_main_versions)).setText(sdkVersion);
+*/
     }
 
     /**
